@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
@@ -54,7 +53,20 @@ public class MainActivity extends AppCompatActivity {
         // Configurar el listener para las opciones del menú desplegable
         popupMenu.setOnMenuItemClickListener(submenuItem -> {
             // Puedes agregar lógica específica para cada opción aquí
-            showToast(submenuItem.getTitle().toString());
+            int submenuItemId = submenuItem.getItemId();
+
+            // Verificar si la opción seleccionada tiene un submenú adicional
+            if (submenuItemId == R.id.submenu_item1 || submenuItemId == R.id.submenu_item2) {
+                // Mostrar submenú adicional para opciones de "Configuración"
+                showSubMenu(R.menu.submenu_settings_additional);
+            } else if (submenuItemId == R.id.submenu_item3 || submenuItemId == R.id.submenu_item4) {
+                // Mostrar submenú adicional para opciones de "Acerca de"
+                showSubMenu(R.menu.submenu_about_additional);
+            } else {
+                // Lógica para las opciones regulares del submenú
+                showToast(submenuItem.getTitle().toString());
+            }
+
             return true;
         });
 
